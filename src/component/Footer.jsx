@@ -95,9 +95,9 @@ export default function Footer() {
                     © 2025 Ai Mark Labs. All rights reserved.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
-                    <a href="#" className="hover:text-white">Privacy Policy</a>
-                    <a href="#" className="hover:text-white">Terms of Service</a>
-                    <a href="#" className="hover:text-white">Cookies Settings</a>
+                    <a href="/" className="hover:text-white">Privacy Policy</a>
+                    <a href="/" className="hover:text-white">Terms of Service</a>
+                    <a href="/" className="hover:text-white">Cookies Settings</a>
                 </div>
             </div>
         </footer>
