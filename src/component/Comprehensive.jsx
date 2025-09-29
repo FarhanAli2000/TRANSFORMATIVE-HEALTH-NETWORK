@@ -12,11 +12,11 @@ export default function Comprehensive() {
                 />
 
                 {/* Decorative circle or stethoscope */}
-                <img
+                {/* <img
                     src="/images/About/about2.png"
                     alt="Decoration"
                     className="absolute -left-16 bottom-6 w-40 hidden md:block animate-bounce-slow"
-                />
+                /> */}
             </div>
 
             {/* Left Side - Text Content */}

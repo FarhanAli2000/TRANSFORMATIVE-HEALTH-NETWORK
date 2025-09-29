@@ -11,8 +11,8 @@ export default function ConsultingPage() {
         <div>
             <Navbar />
             <ServicesSection />
-            <HealthcareExpert />
             <ConsultationForm />
+            <HealthcareExpert />
             <Footer />
         </div>
     );

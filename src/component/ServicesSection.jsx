@@ -28,7 +28,7 @@ export default function ServicesSection() {
         },
     ];
 
-    // Parent container animation (stagger children)
+    // Animations
     const container = {
         hidden: { opacity: 0 },
         show: {
@@ -39,14 +39,44 @@ export default function ServicesSection() {
         },
     };
 
-    // Each card animation
     const cardVariant = {
         hidden: { opacity: 0, y: 60, scale: 0.95 },
-        show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: "easeOut" } },
+        show: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: { duration: 0.7, ease: "easeOut" },
+        },
     };
 
     return (
         <section className="py-16 bg-white">
+            {/* Top Headline + Paragraph Section */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true }}
+                className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start gap-8 mb-16"
+            >
+                <div className="md:w-1/2">
+                    <h2 className="text-3xl font-bold leading-snug text-black">
+                        Headline that<br />highlights
+                    </h2>
+                </div>
+                <div className="md:w-1/2 text-gray-700">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dictum
+                        eleifend eros a pharetra. Cras aliquam vestibulum vehicula. Sed sed
+                        lectus risus. Vestibulum maximus ex purus in tincidunt. In venenatis
+                        lacus urna, id porta risus semper quis. Aenean vel posuere urna, sit
+                        amet placerat massa. Quisque efficitur interdum libero, sed dictum
+                        lorem euismod sed.
+                    </p>
+                </div>
+            </motion.div>
+
+            {/* Services Cards */}
             <motion.div
                 variants={container}
                 initial="hidden"
@@ -64,7 +94,6 @@ export default function ServicesSection() {
                         }}
                         className="bg-gray-50 p-6 rounded-2xl shadow transition cursor-pointer"
                     >
-                        {/* Icon animation */}
                         <motion.div
                             whileHover={{ scale: 1.2, rotate: [0, -10, 10, -5, 0] }}
                             transition={{ duration: 0.8, ease: "easeInOut" }}

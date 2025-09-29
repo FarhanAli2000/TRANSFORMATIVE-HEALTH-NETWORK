@@ -18,7 +18,7 @@ export default function AboutSection() {
                     Our Vision & Mission
                 </p>
                 <h2 className="text-4xl font-bold text-gray-900 mt-2">
-                    About Transformative Health Network
+                    About Transformative Health Network 
                 </h2>
                 <p className="text-gray-600 mt-4 leading-relaxed">
                     Transformative Health Network is a purpose-driven health consulting
