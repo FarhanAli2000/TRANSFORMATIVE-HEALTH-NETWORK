@@ -1,4 +1,4 @@
-"use client";
+
 
 import Navbar from "../component/Navbar";
 import FinalForm from "../component/FinalForm";

@@ -1,4 +1,4 @@
-"use client";
+
 
 import { Linkedin, Globe, X } from "lucide-react";
 
