@@ -1,4 +1,4 @@
-
+"use client"
 import { motion } from "framer-motion";
 import { FaProjectDiagram, FaChartBar, FaHandshake } from "react-icons/fa";
 
