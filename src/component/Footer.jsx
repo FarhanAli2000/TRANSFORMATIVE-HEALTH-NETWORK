@@ -49,11 +49,11 @@ export default function Footer() {
                 <div>
                     <h4 className="font-semibold text-white mb-3">Navigation</h4>
                     <ul className="space-y-2 text-sm">
-                        <li><a href="#" className="hover:text-white">Link One</a></li>
-                        <li><a href="#" className="hover:text-white">Link Two</a></li>
-                        <li><a href="#" className="hover:text-white">Link Three</a></li>
-                        <li><a href="#" className="hover:text-white">Link Four</a></li>
-                        <li><a href="#" className="hover:text-white">Link Five</a></li>
+                        <li><a href="/" className="hover:text-white">Link One</a></li>
+                        <li><a href="/" className="hover:text-white">Link Two</a></li>
+                        <li><a href="/" className="hover:text-white">Link Three</a></li>
+                        <li><a href="/" className="hover:text-white">Link Four</a></li>
+                        <li><a href="/" className="hover:text-white">Link Five</a></li>
                     </ul>
                 </div>
 
@@ -61,11 +61,11 @@ export default function Footer() {
                 <div>
                     <h4 className="font-semibold text-white mb-3">Extra Links</h4>
                     <ul className="space-y-2 text-sm">
-                        <li><a href="#" className="hover:text-white">Link Six</a></li>
-                        <li><a href="#" className="hover:text-white">Link Seven</a></li>
-                        <li><a href="#" className="hover:text-white">Link Eight</a></li>
-                        <li><a href="#" className="hover:text-white">Link Nine</a></li>
-                        <li><a href="#" className="hover:text-white">Link Ten</a></li>
+                        <li><a href="/" className="hover:text-white">Link Six</a></li>
+                        <li><a href="/" className="hover:text-white">Link Seven</a></li>
+                        <li><a href="/" className="hover:text-white">Link Eight</a></li>
+                        <li><a href="/" className="hover:text-white">Link Nine</a></li>
+                        <li><a href="/" className="hover:text-white">Link Ten</a></li>
                     </ul>
                 </div>
 

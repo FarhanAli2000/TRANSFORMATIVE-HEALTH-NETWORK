@@ -62,19 +62,19 @@ export default function Ourfounder() {
                                 {/* Social Icons */}
                                 <div className="flex space-x-7 mt-4 justify-center">
                                     <a
-                                        href="#"
+                                        href="/"
                                         className="text-gray-500 hover:text-blue-600 transition"
                                     >
                                         <Linkedin size={20} />
                                     </a>
                                     <a
-                                        href="#"
+                                        href="/"
                                         className="text-gray-500 hover:text-black transition"
                                     >
                                         <X size={20} />
                                     </a>
                                     <a
-                                        href="#"
+                                        href="/"
                                         className="text-gray-500 hover:text-purple-600 transition"
                                     >
                                         <Globe size={20} />

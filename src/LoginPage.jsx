@@ -38,7 +38,7 @@ const LoginPage = () => {
               </h1>
             </div>
             <a
-              href="#"
+              href="/"
               className="text-sm text-gray-500 hover:text-blue-600 transition"
             >
               Register
@@ -97,7 +97,7 @@ const LoginPage = () => {
 
           {/* Footer Links */}
           <div className="flex justify-between items-center mt-4 text-sm">
-            <a href="#" className="text-blue-600 hover:underline">
+            <a href="/" className="text-blue-600 hover:underline">
               Forget Password
             </a>
           </div>
