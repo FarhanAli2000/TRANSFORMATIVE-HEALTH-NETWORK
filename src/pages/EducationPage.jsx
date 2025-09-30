@@ -5,6 +5,7 @@ import HealthcareExpert from "../component/HealthcareExpert";
 import Footer from "../component/Footer";
 import Educationvision from "../component/Educationvision";
 import EducationSection from "../component/EducationSection";
+import BackToTop from "../component/BackToTop";
 
 
 export default function EducationPage() {
@@ -15,6 +16,7 @@ export default function EducationPage() {
             <EducationSection />
             <HealthcareExpert />
             <Footer />
+            <BackToTop />
         </div>
     );
 }

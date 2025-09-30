@@ -5,6 +5,7 @@ import FinalForm from "../component/FinalForm";
 import HealthcareExpert from "../component/HealthcareExpert";
 import LocationSection from "../component/LocationSection";
 import Footer from "../component/Footer";
+import BackToTop from "../component/BackToTop";
 
 export default function ContactPage() {
   return (
@@ -15,6 +16,7 @@ export default function ContactPage() {
       <HealthcareExpert />
 
       <Footer />
+<BackToTop />
     </div>
   );
 }

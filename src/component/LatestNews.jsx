@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "framer-motion";
 import React from "react";
 
 const newsData = [
@@ -30,8 +31,30 @@ const newsData = [
 ];
 
 export default function LatestNews() {
+    // container animation
+    const container = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    };
+
+    // card animation
+    const card = {
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+    };
+
     return (
-        <section className="bg-gradient-to-b from-[#F5F8FF] to-[#E8F0FF] py-20">
+        <motion.section
+            className="bg-gradient-to-b from-[#F5F8FF] to-[#E8F0FF] py-20"
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+        >
             <div className="max-w-7xl mx-auto px-6 text-center">
                 <p className="text-sm font-semibold text-blue-600 uppercase tracking-wide">
                     What is happening
@@ -43,11 +66,13 @@ export default function LatestNews() {
                 </p>
 
                 {/* News Cards */}
-                <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <motion.div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
                     {newsData.map((item) => (
-                        <div
+                        <motion.div
                             key={item.id}
-                            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition"
+                            className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition cursor-pointer"
+                            variants={card}
+                            whileHover={{ scale: 1.05 }}
                         >
                             <img
                                 src={item.image}
@@ -60,14 +85,14 @@ export default function LatestNews() {
                                 </span>
                                 <h3 className="mt-4 text-lg font-semibold">{item.title}</h3>
                                 <p className="mt-2 text-gray-600 text-sm">{item.description}</p>
-                                <button className="mt-4 inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg text-sm font-medium shadow-md">
+                                <button className="mt-4 inline-flex items-center text-white bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg text-sm font-medium shadow-md transition-transform">
                                     Read now →
                                 </button>
                             </div>
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </motion.section>
     );
 }

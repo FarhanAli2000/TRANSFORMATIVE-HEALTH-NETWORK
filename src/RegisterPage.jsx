@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -12,34 +13,31 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        // Save token
-        localStorage.setItem("token", data.token);
-
         // ✅ Success Alert
         Swal.fire({
           icon: "success",
-          title: "Welcome Back 🎉",
-          text: "Login successful! Redirecting...",
+          title: "Registration Successful 🎉",
+          text: "Your account has been created. Redirecting to login...",
           showConfirmButton: false,
           timer: 2000,
         });
 
         // Redirect after 2 sec
-        setTimeout(() => navigate("/upload-resume"), 2000);
+        setTimeout(() => navigate("/login"), 2000);
       } else {
         Swal.fire({
           icon: "error",
-          title: "Invalid Credentials",
-          text: data.msg || "Please check your email & password.",
+          title: "Registration Failed",
+          text: data.msg || "Please try again.",
         });
       }
     } catch (err) {
@@ -47,7 +45,7 @@ const LoginPage = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Something went wrong! Please try again later.",
+        text: "Something went wrong. Try again later!",
       });
     }
   };
@@ -75,21 +73,35 @@ const LoginPage = () => {
               </h1>
             </div>
             <a
-              href="/register"
+              href="/login"
               className="text-sm text-gray-500 hover:text-blue-600 transition"
             >
-              Register
+              Login
             </a>
           </div>
 
           {/* Heading */}
           <h2 className="text-2xl font-bold text-gray-800">
-            Welcome Back
+            Create Your Account
           </h2>
-          <p className="text-gray-500 mb-6">Login to continue.</p>
+          <p className="text-gray-500 mb-6">Register to get started.</p>
 
           {/* Form */}
           <form className="space-y-5" onSubmit={handleSubmit}>
+            {/* Name */}
+            <div>
+              <label className="block text-sm font-medium text-gray-600">
+                Full Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your full name"
+                className="w-full border rounded-lg px-3 py-2 mt-1 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+              />
+            </div>
+
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-600">
@@ -132,20 +144,13 @@ const LoginPage = () => {
               type="submit"
               className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
             >
-              Log In
+              Register
             </button>
           </form>
 
-          {/* Footer Links */}
-          <div className="flex justify-between items-center mt-4 text-sm">
-            <a href="/forgot-password" className="text-blue-600 hover:underline">
-              Forget Password
-            </a>
-          </div>
-
           {/* Terms */}
           <p className="text-xs text-gray-400 mt-8 text-center">
-            By using Transformative Health Network you agree to our terms and policy.
+            By creating an account, you agree to our terms and policy.
           </p>
         </div>
       </div>
@@ -153,4 +158,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -1,21 +1,20 @@
+"use client"
+
 import React from "react";
-import {
-    Facebook,
-    Instagram,
-    Linkedin,
-    Twitter,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#111827] text-gray-300 py-12">
-            {/* Heading: Transformative Health Network */}
-            <h1 className="text-center text-2xl font-semibold text-white mb-10">
-                Transformative Health Network
-            </h1>
+        <footer className="bg-[#111827] text-gray-300 py-12 relative overflow-hidden">
+            {/* Marquee Heading */}
+            <div className="w-full overflow-hidden whitespace-nowrap">
+                <h1 className="text-2xl font-semibold text-white animate-slide px-full">
+                    Transformative Health Network
+                </h1>
+            </div>
 
             {/* Grid Section */}
-            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12">
                 {/* Logo + Newsletter */}
                 <div>
                     <img
@@ -100,6 +99,22 @@ export default function Footer() {
                     <a href="/" className="hover:text-white">Cookies Settings</a>
                 </div>
             </div>
+
+            {/* Animation Styles */}
+            <style>
+                {`
+                    @keyframes slide {
+                        0% { transform: translateX(100%); }
+                        50% { transform: translateX(-100%); }
+                        100% { transform: translateX(100%); }
+                    }
+                    .animate-slide {
+                        display: inline-block;
+                        animation: slide 25s linear infinite;
+                    }
+                    .px-full { padding-left: 100%; }
+                `}
+            </style>
         </footer>
     );
 }

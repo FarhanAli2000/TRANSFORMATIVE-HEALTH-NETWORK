@@ -8,6 +8,7 @@ import CompanyStats from "../component/CompanyStats";
 import HealthcareExpert from "../component/HealthcareExpert";
 import Ourfounder from "../component/Ourfounder";
 import Footer from "../component/Footer";
+import BackToTop from "../component/BackToTop";
 
 
 export default function AboutPage() {
@@ -21,6 +22,7 @@ export default function AboutPage() {
             <HealthcareExpert />
             <Ourfounder />
             <Footer />
+            <BackToTop />
         </div>
     );
 }
