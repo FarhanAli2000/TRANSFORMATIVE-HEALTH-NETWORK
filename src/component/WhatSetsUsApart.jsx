@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -93,23 +93,18 @@ export default function WhatSetsUsApart() {
           <motion.div
             key={index}
             variants={cardVariants}
-            whileHover={{ scale: 1.05, y: -5 }}
+            whileHover={{ scale: 1.05, y: -5 }} // Card hover effect
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
             <div className="p-6 rounded-2xl shadow-md hover:shadow-xl transition bg-white flex flex-col h-full">
-              {/* Icon with animation */}
-              <motion.div
-                className="text-3xl mb-4"
-                whileHover={{ rotate: 15, scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 200 }}
-              >
-                {feature.icon}
-              </motion.div>
+              {/* Icon without hover animation */}
+              <div className="text-3xl mb-4">{feature.icon}</div>
 
               <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
                 {feature.description}
               </p>
+
               <motion.button
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 font-medium text-sm mt-auto"
