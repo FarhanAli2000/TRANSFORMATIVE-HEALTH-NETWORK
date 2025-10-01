@@ -4,9 +4,9 @@ import { Star } from "lucide-react";
 
 export default function HeroSection() {
     return (
-        <section className="flex flex-col md:flex-row items-center px-10 py-16 max-w-full mx-auto bg-[#F5F8FF]">
+        <section className="flex flex-col md:flex-row items-center px-20  max-w-full mx-auto bg-[#F5F8FF]">
             {/* Left Side - Text */}
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col justify-center">
                 <p className="text-[#1EA0E6] font-semibold">
                     Transformative Health Network
                 </p>
@@ -20,7 +20,7 @@ export default function HeroSection() {
                 </p>
 
                 {/* Buttons */}
-                <div className="mt-6 flex gap-4">
+                <div className="mt-6 flex gap-4 flex-wrap">
                     <button className="px-6 py-3 bg-[#1EA0E6] text-white rounded-lg shadow hover:bg-blue-700 transition">
                         Request a Free Consultation →
                     </button>
@@ -31,18 +31,18 @@ export default function HeroSection() {
 
                 {/* Contact */}
                 <div className="mt-6">
-                    <button className="flex items-center gap-2 bg-[#0FA958] text-white px-5 py-3 rounded-full shadow-lg">
+                    <button className="flex items-center gap-2 bg-[#0FA958] text-white px-5 py-3 rounded-full shadow-lg hover:bg-green-600 transition">
                         <span>📞</span> Contact Us Now
                     </button>
                 </div>
             </div>
 
             {/* Right Side - Image */}
-            <div className="flex-1 relative mt-12 md:mt-0 flex justify-center">
+            <div className="flex-1 relative w-full md:w-auto h-full flex justify-center mt-8 md:mt-0">
                 <img
                     src="/images/doctors.jpg"
                     alt="Doctors"
-                    className="rounded-b-full object-cover w-[500px] h-[600px]"
+                    className="rounded-b-full object-cover w-full h-full max-w-[500px]"
                 />
 
                 {/* Testimonial Card */}
