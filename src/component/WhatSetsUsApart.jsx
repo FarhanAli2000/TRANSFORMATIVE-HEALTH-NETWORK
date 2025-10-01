@@ -105,12 +105,12 @@ export default function WhatSetsUsApart() {
                 {feature.description}
               </p>
 
-              <motion.button
+              {/* <motion.button
                 whileHover={{ x: 5 }}
                 className="flex items-center gap-2 text-indigo-600 hover:text-indigo-800 font-medium text-sm mt-auto"
               >
                 Learn More <ArrowRight className="w-4 h-4" />
-              </motion.button>
+              </motion.button> */}
             </div>
           </motion.div>
         ))}

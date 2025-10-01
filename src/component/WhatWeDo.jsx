@@ -58,12 +58,12 @@ export default function WhatWeDo() {
                             <p className="mt-3 text-gray-600 text-sm leading-relaxed">
                                 {service.description}
                             </p>
-                            <a
+                            {/* <a
                                 href={service.link}
                                 className="mt-4 inline-flex items-center text-blue-600 font-medium text-sm hover:underline"
                             >
                                 Learn More →
-                            </a>
+                            </a> */}
                         </div>
                     ))}
                 </div>
