@@ -11,7 +11,8 @@ export default function HeroSection() {
                     Transformative Health Network
                 </p>
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2">
-                    Transformative <br /> Health Network
+                    Transformative <br /> Health Network 
+                
                 </h1>
                 <p className="text-gray-600 mt-4 max-w-lg">
                     We bridge the gap between healthcare professionals and innovation,
