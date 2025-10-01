@@ -1,40 +1,45 @@
 "use client";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react"; 
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown } from "lucide-react"; 
 import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
+    // Click outside dropdown to close
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
+    setDropdownOpen(false);
     navigate("/login");
   };
 
-  // ✅ profile image helper
   const getProfileImage = (profileImage) => {
     if (!profileImage) return "/images/default-avatar.png";
-
-    // agar base64 string hai
     if (profileImage.startsWith("/9j/") || profileImage.startsWith("iVBOR")) {
-      // "/9j/" jpeg ka typical start hota hai
-      // "iVBOR" png ka start hota hai
       const type = profileImage.startsWith("/9j/") ? "jpeg" : "png";
       return `data:image/${type};base64,${profileImage}`;
     }
-
-    // agar URL ya normal path hai
     return profileImage;
   };
 
@@ -77,22 +82,40 @@ export default function Navbar() {
         </nav>
 
         {/* Desktop Auth/Profile */}
-        <div className="hidden md:flex gap-4 items-center">
+        <div className="hidden md:flex gap-4 items-center relative" ref={dropdownRef}>
           {user ? (
-            <div className="flex items-center gap-3">
-              <NavLink to="/profile">
+            <div className="relative">
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-2 focus:outline-none"
+              >
                 <img
                   src={getProfileImage(user.profileImage)}
                   alt="Profile"
-                  className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
+                  className="w-10 h-10 rounded-full border border-gray-300"
                 />
-              </NavLink>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-sm border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition"
-              >
-                Logout
+                <ChevronDown size={20} />
               </button>
+
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-50">
+                  <button
+                    onClick={() => {
+                      navigate("/profile");
+                      setDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-t-lg"
+                  >
+                    Profile
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-b-lg text-red-500"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <>
@@ -136,41 +159,23 @@ export default function Navbar() {
               </NavLink>
             ))}
           </nav>
-          <div className="flex flex-col gap-3 px-6 py-4">
-            {user ? (
-              <>
-                <NavLink to="/profile">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={getProfileImage(user.profileImage)}
-                      alt="Profile"
-                      className="w-10 h-10 rounded-full border border-gray-300"
-                    />
-                    <span>{user.name}</span>
-                  </div>
-                </NavLink>
-                <button
-                  onClick={handleLogout}
-                  className="px-4 py-2 text-sm border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <NavLink to="/login">
-                  <button className="px-4 py-2 text-sm border border-[#1EA0E6] text-[#1EA0E6] rounded-lg hover:bg-blue-50 transition">
-                    Log in
-                  </button>
-                </NavLink>
-                <NavLink to="/register">
-                  <button className="px-4 py-2 text-sm bg-[#1EA0E6] text-white rounded-lg hover:bg-blue-700 transition">
-                    Sign up
-                  </button>
-                </NavLink>
-              </>
-            )}
-          </div>
+
+          {user && (
+            <div className="flex flex-col gap-2 px-6 py-4 border-t">
+              <button
+                onClick={() => { navigate("/profile"); setIsOpen(false); }}
+                className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg"
+              >
+                Profile
+              </button>
+              <button
+                onClick={() => { handleLogout(); setIsOpen(false); }}
+                className="w-full text-left px-4 py-2 hover:bg-gray-100 rounded-lg text-red-500"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       )}
     </header>
