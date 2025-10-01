@@ -1,11 +1,42 @@
 "use client";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react"; 
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
+  };
+
+  // ✅ profile image helper
+  const getProfileImage = (profileImage) => {
+    if (!profileImage) return "/images/default-avatar.png";
+
+    // agar base64 string hai
+    if (profileImage.startsWith("/9j/") || profileImage.startsWith("iVBOR")) {
+      // "/9j/" jpeg ka typical start hota hai
+      // "iVBOR" png ka start hota hai
+      const type = profileImage.startsWith("/9j/") ? "jpeg" : "png";
+      return `data:image/${type};base64,${profileImage}`;
+    }
+
+    // agar URL ya normal path hai
+    return profileImage;
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -45,18 +76,38 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Desktop Auth Buttons */}
-        <div className="hidden md:flex gap-4">
-          <NavLink to="/login">
-            <button className="px-4 py-2 text-sm border border-[#1EA0E6] text-[#1EA0E6] rounded-lg hover:bg-blue-50 transition">
-              Log in
-            </button>
-          </NavLink>
-          <NavLink to="/register">
-            <button className="px-4 py-2 text-sm bg-[#1EA0E6] text-white rounded-lg hover:bg-blue-700 transition">
-              Sign up
-            </button>
-          </NavLink>
+        {/* Desktop Auth/Profile */}
+        <div className="hidden md:flex gap-4 items-center">
+          {user ? (
+            <div className="flex items-center gap-3">
+              <NavLink to="/profile">
+                <img
+                  src={getProfileImage(user.profileImage)}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
+                />
+              </NavLink>
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 text-sm border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <>
+              <NavLink to="/login">
+                <button className="px-4 py-2 text-sm border border-[#1EA0E6] text-[#1EA0E6] rounded-lg hover:bg-blue-50 transition">
+                  Log in
+                </button>
+              </NavLink>
+              <NavLink to="/register">
+                <button className="px-4 py-2 text-sm bg-[#1EA0E6] text-white rounded-lg hover:bg-blue-700 transition">
+                  Sign up
+                </button>
+              </NavLink>
+            </>
+          )}
         </div>
 
         {/* Mobile Toggle Button */}
@@ -86,16 +137,39 @@ export default function Navbar() {
             ))}
           </nav>
           <div className="flex flex-col gap-3 px-6 py-4">
-            <NavLink to="/login">
-              <button className="px-4 py-2 text-sm border border-[#1EA0E6] text-[#1EA0E6] rounded-lg hover:bg-blue-50 transition">
-                Log in
-              </button>
-            </NavLink>
-            <NavLink to="/register">
-              <button className="px-4 py-2 text-sm bg-[#1EA0E6] text-white rounded-lg hover:bg-blue-700 transition">
-                Sign up
-              </button>
-            </NavLink>
+            {user ? (
+              <>
+                <NavLink to="/profile">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={getProfileImage(user.profileImage)}
+                      alt="Profile"
+                      className="w-10 h-10 rounded-full border border-gray-300"
+                    />
+                    <span>{user.name}</span>
+                  </div>
+                </NavLink>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-sm border border-red-500 text-red-500 rounded-lg hover:bg-red-50 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login">
+                  <button className="px-4 py-2 text-sm border border-[#1EA0E6] text-[#1EA0E6] rounded-lg hover:bg-blue-50 transition">
+                    Log in
+                  </button>
+                </NavLink>
+                <NavLink to="/register">
+                  <button className="px-4 py-2 text-sm bg-[#1EA0E6] text-white rounded-lg hover:bg-blue-700 transition">
+                    Sign up
+                  </button>
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       )}

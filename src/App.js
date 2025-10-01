@@ -43,8 +43,9 @@ function App() {
             <LogoCarousel />
             <HealthcareExpert />
             <LatestNews />
-            <BackToTop />
+           
             <Footer />
+             <BackToTop />
           </div>
         }
       />

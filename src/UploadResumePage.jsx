@@ -13,7 +13,6 @@ export default function UploadResumePage() {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Optional: validate file size (<5MB)
     if (file.size > 5 * 1024 * 1024) {
       Swal.fire("❌ Error", "File size must be less than 5MB", "error");
       return;
@@ -35,7 +34,7 @@ export default function UploadResumePage() {
     formData.append("photo", photo);
 
     try {
-      const token = localStorage.getItem("token"); // user must be logged in
+      const token = localStorage.getItem("token");
       const res = await fetch("http://localhost:5000/api/auth/upload", {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
@@ -47,7 +46,7 @@ export default function UploadResumePage() {
 
       if (res.ok) {
         Swal.fire("✅ Success", "Resume & Photo uploaded successfully!", "success");
-        navigate("/profile"); // redirect to profile page
+        navigate("/profile");
       } else {
         Swal.fire("❌ Error", data.msg || "Upload failed", "error");
       }
@@ -66,12 +65,10 @@ export default function UploadResumePage() {
 
       {/* Right Form */}
       <div className="flex flex-col items-center justify-center p-8">
-        <img src="/images/logo.jpg" alt="Logo" className="mb-6 h-10" />
         <h2 className="text-2xl font-bold mb-2">Upload Your Resume</h2>
-        <p className="text-gray-500 mb-6">Register to continue.</p>
 
-        {/* Resume */}
-        <div className="w-full max-w-md border rounded-lg p-4 mb-4 shadow-sm">
+        {/* Resume Upload */}
+        <div className="w-full max-w-md border rounded-lg p-4 mb-4">
           <input
             type="file"
             accept=".pdf,.doc,.docx"
@@ -79,16 +76,13 @@ export default function UploadResumePage() {
             id="resumeUpload"
             onChange={(e) => handleFileChange(e, "resume")}
           />
-          <label
-            htmlFor="resumeUpload"
-            className="cursor-pointer px-4 py-2 bg-blue-100 text-blue-600 rounded inline-block"
-          >
+          <label htmlFor="resumeUpload" className="cursor-pointer px-4 py-2 bg-blue-100 text-blue-600 rounded inline-block">
             📄 {resume ? resume.name : "Upload Resume"}
           </label>
         </div>
 
-        {/* Photo */}
-        <div className="w-full max-w-md border rounded-lg p-4 mb-6 shadow-sm">
+        {/* Photo Upload */}
+        <div className="w-full max-w-md border rounded-lg p-4 mb-6">
           <input
             type="file"
             accept="image/*"
@@ -96,10 +90,7 @@ export default function UploadResumePage() {
             id="photoUpload"
             onChange={(e) => handleFileChange(e, "photo")}
           />
-          <label
-            htmlFor="photoUpload"
-            className="cursor-pointer px-4 py-2 bg-blue-100 text-blue-600 rounded inline-block"
-          >
+          <label htmlFor="photoUpload" className="cursor-pointer px-4 py-2 bg-blue-100 text-blue-600 rounded inline-block">
             📷 {photo ? photo.name : "Upload Photo"}
           </label>
         </div>

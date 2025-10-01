@@ -7,37 +7,37 @@ const features = [
   {
     title: "Comprehensive Service Offering",
     description:
-      "To assist with compliance, product development, and operations, we link our clients with reputable medical consultants and healthcare IT specialists. Perfect for clinics, startups, or anyone looking for strategic advice on healthcare.",
+      "We offer education, investment, networking, and consulting on a single platform.",
     icon: "✨",
   },
   {
     title: "Experienced Leadership",
     description:
-      "We support the expansion of early-stage healthcare businesses by giving them access to R&D resources, staffing solutions, real estate assistance, and health tech funding, all of which are intended to help them scale operations steadily and confidently.",
+      "Under the direction of distinguished experts like Dr. Ally Lasu and Dr. Kevin Dang, as well as seasoned executives from business and health consulting.",
     icon: "🏢",
   },
   {
     title: "Local and Global Network",
     description:
-      "We offer free CEUs and CME programs, grand rounds, and mentorship opportunities to support ongoing education, professional growth, and global healthcare access for students, providers, and underserved communities.",
+      "As one of the most trusted healthcare consulting companies near me, we work across communities and continents.",
     icon: "🌐",
   },
   {
     title: "Flexible & Scalable Model",
     description:
-      "To assist with compliance, product development, and operations, we link our clients with reputable medical consultants and healthcare IT specialists. Perfect for clinics, startups, or anyone looking for strategic advice on healthcare.",
+      "Our services are designed to accommodate professionals, startups, and large organizations at any stage.",
     icon: "⚖️",
   },
   {
     title: "Diverse Revenue Streams",
     description:
-      "We support the expansion of early-stage healthcare businesses by giving them access to R&D resources, staffing solutions, real estate assistance, and health tech funding, all of which are intended to help them scale operations steadily and confidently.",
+      "Our model maintains long-term growth through consulting fees, event revenue, and investment returns.",
     icon: "🔀",
   },
   {
     title: "Technology-Integrated Operations",
     description:
-      "We offer free CEUs and CME programs, grand rounds, and mentorship opportunities to support ongoing education, professional growth, and global healthcare access for students, providers, and underserved communities.",
+      "We guarantee seamless digital interactions and service delivery with plans for a website and mobile app.",
     icon: "⚛️",
   },
 ];

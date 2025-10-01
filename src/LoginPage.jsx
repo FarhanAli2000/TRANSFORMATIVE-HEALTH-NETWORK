@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -8,7 +9,6 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  // Submit handler
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -21,20 +21,38 @@ const LoginPage = () => {
       const data = await res.json();
 
       if (res.ok) {
-        // Save token
+        // ✅ Save token
         localStorage.setItem("token", data.token);
 
-        // ✅ Success Alert
-        Swal.fire({
-          icon: "success",
-          title: "Welcome Back 🎉",
-          text: "Login successful! Redirecting...",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        // ✅ Ensure profileImage exists
+        const userData = {
+          ...data.user,
+          profileImage: data.user.profileImage || "/images/default-avatar.png",
+        };
 
-        // Redirect after 2 sec
-        setTimeout(() => navigate("/upload-resume"), 2000);
+        // ✅ Save user object in localStorage
+        localStorage.setItem("user", JSON.stringify(userData));
+
+        // ✅ Resume status check
+        if (userData.resumeUploaded) {
+          Swal.fire({
+            icon: "info",
+            title: "Profile Already Exists",
+            text: "Aapki profile already bani hui hai. Redirecting to profile...",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          setTimeout(() => navigate("/profile"), 2000);
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Welcome 🎉",
+            text: "Login successful! Please upload your resume to continue.",
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          setTimeout(() => navigate("/upload-resume"), 2000);
+        }
       } else {
         Swal.fire({
           icon: "error",
@@ -43,109 +61,71 @@ const LoginPage = () => {
         });
       }
     } catch (err) {
-      console.error(err);
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong! Please try again later.",
-      });
+      Swal.fire("❌ Error", "Something went wrong!", "error");
     }
   };
 
   return (
     <div className="flex h-screen">
-      {/* Left Section */}
+      {/* Left Image */}
       <div className="hidden lg:flex flex-1 relative">
         <img src="/images/doctors.jpg" alt="Doctors" className="w-full h-full" />
-        <div className="absolute bottom-6 left-6 right-6 text-white text-sm bg-black/40 p-4 rounded-md">
-          Penatibus est feugiat sed ut dui eget eget...
-        </div>
       </div>
 
-      {/* Right Section */}
+      {/* Right Form */}
       <div className="flex flex-1 justify-center items-center bg-white px-6">
         <div className="w-full max-w-md">
-          {/* Logo */}
-          <div className="flex justify-between items-center mb-8">
-            <div className="flex items-center gap-2">
-              <img src="/images/logo-pic.png" alt="Logo" className="w-10 h-10" />
-              <h1 className="font-bold text-lg text-[#1d2a57] leading-tight">
-                TRANSFORMATIVE <br />
-                <span className="text-[#2d84f7]">HEALTH NETWORK</span>
-              </h1>
-            </div>
-            <a
-              href="/register"
-              className="text-sm text-gray-500 hover:text-blue-600 transition"
-            >
-              Register
-            </a>
-          </div>
+          <h2 className="text-2xl font-bold mb-6">Welcome Back</h2>
 
-          {/* Heading */}
-          <h2 className="text-2xl font-bold text-gray-800">
-            Welcome Back
-          </h2>
-          <p className="text-gray-500 mb-6">Login to continue.</p>
-
-          {/* Form */}
           <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-600">
-                Email
-              </label>
+              <label>Email</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="w-full border rounded-lg px-3 py-2 mt-1 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full border rounded-lg px-3 py-2 mt-1"
+                required
               />
             </div>
 
-            {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-600">
-                Password
-              </label>
+              <label>Password</label>
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="***********"
-                  className="w-full border rounded-lg px-3 py-2 mt-1 text-gray-700 focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="w-full border rounded-lg px-3 py-2 mt-1"
+                  required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+                  className="absolute right-3 top-2"
                 >
                   {showPassword ? "🙈" : "👁️"}
                 </button>
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 text-white py-2 rounded-lg"
             >
               Log In
             </button>
           </form>
 
-          {/* Footer Links */}
-          <div className="flex justify-between items-center mt-4 text-sm">
-            <a href="/forgot-password" className="text-blue-600 hover:underline">
-              Forget Password
-            </a>
-          </div>
-
-          {/* Terms */}
-          <p className="text-xs text-gray-400 mt-8 text-center">
-            By using Transformative Health Network you agree to our terms and policy.
+          {/* ✅ Register Button */}
+          <p className="mt-4 text-center text-gray-600">
+            Don’t have an account?{" "}
+            <button
+              onClick={() => navigate("/register")}
+              className="text-blue-600 font-semibold hover:underline"
+            >
+              Register
+            </button>
           </p>
         </div>
       </div>
