@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { baseUrl } from "./constants";
 
 export default function VerifyCode() {
   const [code, setCode] = useState("");
@@ -35,7 +36,7 @@ export default function VerifyCode() {
       return;
     }
 
-    const res = await fetch("http://localhost:5000/api/auth/verify-code", {
+    const res = await fetch(`${baseUrl}/auth/verify-code`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, code }),

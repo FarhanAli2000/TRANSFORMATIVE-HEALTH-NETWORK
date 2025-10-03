@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { baseUrl } from "./constants";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,15 +13,16 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${baseUrl}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
       const data = await res.json();
-
+    
       if (res.ok) {
+        console.log("Login successful:", data);
         // ✅ Save token
         localStorage.setItem("token", data.token);
 

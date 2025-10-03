@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { baseUrl } from "./constants";
 
 export default function UploadResumePage() {
   const [resume, setResume] = useState(null);
@@ -35,7 +36,7 @@ export default function UploadResumePage() {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/auth/upload", {
+      const res = await fetch(`${baseUrl}/auth/upload`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

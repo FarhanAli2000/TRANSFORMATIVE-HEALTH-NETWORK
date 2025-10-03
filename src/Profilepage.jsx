@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { baseUrl } from "./constants";
 
 export default function ProfilePage() {
   const [user, setUser] = useState(null);
@@ -11,11 +12,12 @@ export default function ProfilePage() {
   const [editContent, setEditContent] = useState("");
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5000/api/auth/profile", {
+        const res = await fetch(`${baseUrl}/auth/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

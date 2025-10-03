@@ -7,11 +7,11 @@ export default function Footer() {
     return (
         <footer className="bg-[#111827] text-gray-300 py-12 relative overflow-hidden">
             {/* Marquee Heading */}
-            <div className="w-full overflow-hidden whitespace-nowrap">
+            {/* <div className="w-full overflow-hidden whitespace-nowrap">
                 <h1 className="text-2xl font-semibold text-white animate-slide px-full">
                     Transformative Health Network
                 </h1>
-            </div>
+            </div> */}
 
             {/* Grid Section */}
             <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12">
